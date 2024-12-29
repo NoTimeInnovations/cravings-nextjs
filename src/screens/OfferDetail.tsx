@@ -19,6 +19,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useClaimedOffersStore } from "@/store/claimedOffersStore";
 import DiscountBadge from "@/components/DiscountBadge";
+import LikShrCmnt from "@/components/LikShrCmnt";
 // import ScanButton from "@/components/ScanButton";
 
 export default function OfferDetail({ offer }: { offer: Offer }) {
@@ -169,7 +170,11 @@ export default function OfferDetail({ offer }: { offer: Offer }) {
                 </Button>
                 <Share offerId={offerId || ""} className={"w-[100px]"} />
               </div>
-            </div>
+              <LikShrCmnt
+                offerId={typeof offerId === 'string' ? offerId : ''}  
+                offer={offer}
+               />
+            </div> 
           </CardContent>
         </Card>
 
