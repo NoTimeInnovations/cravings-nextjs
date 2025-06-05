@@ -16,6 +16,7 @@ import {
   getAuthCookie,
   setAuthCookie,
   removeAuthCookie,
+  removeLocationCookie,
 } from "@/app/auth/actions";
 import { sendRegistrationWhatsAppMsg } from "@/app/actions/sendWhatsappMsgs";
 import { FeatureFlags, getFeatures } from "@/lib/getFeatures";
@@ -77,6 +78,7 @@ export interface Partner extends BaseUser {
   gst_percentage?: number;
   business_type?: string; 
   is_shop_open: boolean;
+  country_code?: string;
 }
 
 export interface SuperAdmin extends BaseUser {
@@ -228,6 +230,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   signOut: async() => {
     await removeAuthCookie();
+    await removeLocationCookie();
     localStorage.clear();
     window.location.href = "/";
     set({ userData: null, error: null });
